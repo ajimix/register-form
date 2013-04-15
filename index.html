@@ -105,6 +105,8 @@
 		<script>
 			( function ( doc, _UNDEFINED_ ) {
 
+				'use strict';
+
 				var _TRUE_ = true, // Improve minified file (in case of).
 					_FALSE_ = false,
 					_NULL_ = null,
@@ -126,10 +128,15 @@
 					FormValidator = function () {
 
 							/**
+							 * ClassName for errors.
+							 * @type {String}
+							 */
+						var sErrorClass = 'error',
+							/**
 							 * Contains the form for usage inside functions.
 							 * @type {object}
 							 */
-						var oForm,
+							oForm,
 							/**
 							 * Contains the fields with errors.
 							 * @type {Array}
@@ -201,26 +208,47 @@
 
 							/**
 							 * Submits the form data.
-							 * @return {[type]} [description]
 							 */
 							submit: function () {
-								console.log( 'Submit' );
+								oForm.submit();
 							},
 
 							/**
 							 * Notifies errors in the form to the user.
-							 * @return {[type]} [description]
+							 * @return {Boolean} Returns true if the execution has been succesful.
 							 */
 							notifyErrors: function () {
-								console.log( 'Errors' );
+								var nIterator,
+									nErrors = aErrors.length;
+
+								for ( nIterator = 0; nIterator < nErrors; nIterator++ ) {
+									aErrors[nIterator].parentNode.className += ( ' ' + sErrorClass ).trim();
+								}
+
+								return _TRUE_;
 							},
 
 							/**
 							 * Clean form errors.
-							 * @return {[type]} [description]
+							 * @return {Boolean} Returns true if the execution has been succesful.
 							 */
 							cleanErrors: function () {
-								console.log( 'Reset errors' );
+								var nIterator,
+									nErrors = aErrors.length,
+									oParent;
+
+								for ( nIterator = nErrors; nIterator > 0; nIterator-- ) {
+									oParent = aErrors[nIterator - 1].parentNode;
+									// Remove the class.
+									oParent.className = oParent.className.replace( sErrorClass, '' );
+									// Remove extra spaces.
+									oParent.className = oParent.className.replace( /\s+/, ' ' ).trim();
+								}
+
+								// Clean the array of errors.
+								aErrors = [];
+
+								return _TRUE_;
 							}
 						};
 					},
