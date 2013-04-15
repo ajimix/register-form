@@ -81,6 +81,29 @@
 						box-shadow: 0 2px 2px 0 rgba( 0, 0, 0, .5 );
 						color: #fff;
 					}
+					/* @group ERROR MESSAGES */
+						.error-text {
+							display: block;
+							margin-left: 6px;
+							width: 81%;
+							border-radius: 0 0 3px 3px;
+							background-color: #ffb6b6;
+							color: #f00;
+							text-align: center;
+							font-size: .7em;
+							height: 0;
+							line-height: 2.3em;
+							overflow: hidden;
+							-webkit-transition: height 300ms linear;
+							-moz-transition: height 300ms linear;
+							-ms-transition: height 300ms linear;
+							-o-transition: height 300ms linear;
+							transition: height 300ms linear;
+						}
+							.error .error-text {
+								height: 30px;
+							}
+					/* @endgroup ERROR MESSAGES */
 				/* @endgroup FIELDS */
 			/* @endgroup FORM */
 		</style>
@@ -93,9 +116,15 @@
 			<form id="register-form" action="#" method="post">
 				<ul>
 					<li>Name</li>
-					<li><input type="text" id="name" name="name" maxlength="60" /></li>
+					<li>
+						<input type="text" id="name" name="name" maxlength="60" />
+						<span class="error-text">Name must be at least 3 characters</span>
+					</li>
 					<li>Email</li>
-					<li><input type="text" id="email" name="email" maxlength="100" /></li>
+					<li>
+						<input type="text" id="email" name="email" maxlength="100" />
+						<span class="error-text">Not valid email</span>
+					</li>
 					<li>Password</li>
 					<li><input type="password" id="password" name="password" maxlength="100" /></li>
 					<li><input type="submit" id="register" value="Register" /></li>
