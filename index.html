@@ -141,7 +141,7 @@
 			</form>
 		</div>
 		<script>
-			( function ( doc, _UNDEFINED_ ) {
+			( function ( doc ) {
 
 				'use strict';
 
@@ -167,7 +167,7 @@
 
 							/**
 							 * ClassName for errors.
-							 * @type {String}
+							 * @type {string}
 							 */
 						var sErrorClass = 'error',
 							/**
@@ -246,9 +246,13 @@
 
 							/**
 							 * Submits the form data.
+							 * @return {Boolean} Returns true if the execution has been succesful.
 							 */
 							submit: function () {
+								// Do whatever we want with the form, right now just submit it.
 								oForm.submit();
+
+								return _TRUE_;
 							},
 
 							/**
@@ -296,7 +300,7 @@
 					 * @param  {event} eEvent Fired click event.
 					 */
 					fpRegisterClick = function ( eEvent ) {
-						// Clean previous errors.
+						// Clean previous errors if there are.
 						oFormValidator.cleanErrors();
 
 						// Perform form checks.
@@ -328,7 +332,9 @@
 						fpGetById( 'register' ).addEventListener( 'click', fpRegisterClick, _FALSE_ );
 					};
 
+				// Add dom ready event.
 				doc.addEventListener( 'DOMContentLoaded', fpInit, _FALSE_ );
+
 			} ( document ) );
 		</script>
 	</body>
