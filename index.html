@@ -103,11 +103,167 @@
 			</form>
 		</div>
 		<script>
-			var fpInit = function () {
-				// Initial loading
-			};
+			( function ( doc, _UNDEFINED_ ) {
 
-			document.addEventListener( 'DOMContentLoaded', fpInit, false );
+				var _TRUE_ = true, // Improve minified file (in case of).
+					_FALSE_ = false,
+					_NULL_ = null,
+					oFormValidator, // Object that will form the FormValidator instance.
+
+					/**
+					 * Returns the element by id.
+					 * Again to improve minification.
+					 * @param  {string} sId Id of the element to search for.
+					 * @return {object/null} Return the found object or null.
+					 */
+					fpGetById = function ( sId ) {
+						return doc.getElementById( sId );
+					},
+
+					/**
+					 * Module that validates the form.
+					 */
+					FormValidator = function () {
+
+							/**
+							 * Contains the form for usage inside functions.
+							 * @type {object}
+							 */
+						var oForm,
+							/**
+							 * Contains the fields with errors.
+							 * @type {Array}
+							 */
+							aErrors = [];
+
+						return {
+
+							/**
+							 * Sets the form for later usage in other functions.
+							 * @param {string} sFormId The form id.
+							 * @return {Boolean} If succesfully setted the form object or not.
+							 */
+							setForm: function ( sFormId ) {
+								oForm = fpGetById( sFormId );
+
+								return oForm !== _NULL_;
+							},
+
+							/**
+							 * Returns if the checked data is valid or not.
+							 * @return {Boolean} Form data valid or not.
+							 */
+							isValid: function () {
+								return aErrors.length === 0;
+							},
+
+							/**
+							 * Checks if the element is a valid email.
+							 * @param  {string} sInputId Input to check for.
+							 * @return {Boolean} Return if it's valid or not
+							 */
+							checkEmail: function ( sInputId ) {
+								var oElement = fpGetById( sInputId );
+
+								if ( oElement === _NULL_ ) {
+									return _FALSE_;
+								}
+
+								if ( /[a-z0-9_\-\+\.]+@[a-z0-9\-\.]+\.[a-z]{2,4}/i.test( oElement.value.trim() ) ) {
+									return _TRUE_;
+								}
+
+								aErrors.push( oElement );
+
+								return _FALSE_;
+							},
+
+							/**
+							 * Checks if the element has the required length.
+							 * @param  {string} sInputId Input to check for.
+							 * @return {Boolean} Return if it's valid or not
+							 */
+							checkLength: function ( sInputId, nMinLength ) {
+								var oElement = fpGetById( sInputId );
+
+								if ( oElement === _NULL_ ) {
+									return _FALSE_;
+								}
+
+								if ( oElement.value.trim().length >= nMinLength ) {
+									return _TRUE_;
+								}
+
+								aErrors.push( oElement );
+
+								return _FALSE_;
+							},
+
+							/**
+							 * Submits the form data.
+							 * @return {[type]} [description]
+							 */
+							submit: function () {
+								console.log( 'Submit' );
+							},
+
+							/**
+							 * Notifies errors in the form to the user.
+							 * @return {[type]} [description]
+							 */
+							notifyErrors: function () {
+								console.log( 'Errors' );
+							},
+
+							/**
+							 * Clean form errors.
+							 * @return {[type]} [description]
+							 */
+							cleanErrors: function () {
+								console.log( 'Reset errors' );
+							}
+						};
+					},
+
+					/**
+					 * Function for register button click event.
+					 * @param  {event} eEvent Fired click event.
+					 */
+					fpRegisterClick = function ( eEvent ) {
+						// Clean previous errors.
+						oFormValidator.cleanErrors();
+
+						// Perform form checks.
+						oFormValidator.checkEmail( 'email' );
+						oFormValidator.checkLength( 'name', 3 );
+
+						// If it's valid submit the form, if it's not valid notify errors to the user.
+						if ( oFormValidator.isValid() ) {
+							oFormValidator.submit();
+						} else {
+							oFormValidator.notifyErrors();
+						}
+
+						eEvent.preventDefault();
+					},
+
+					/**
+					 * Init function.
+					 * Called on dom content loaded.
+					 */
+					fpInit = function () {
+						// Create new form validator object.
+						oFormValidator = new FormValidator();
+
+						// Set the form in the validator.
+						oFormValidator.setForm( 'register-form' );
+
+						// Add event to register button.
+						fpGetById( 'register' ).addEventListener( 'click', fpRegisterClick, _FALSE_ );
+					};
+
+				doc.addEventListener( 'DOMContentLoaded', fpInit, _FALSE_ );
+			} ( document ) );
 		</script>
 	</body>
 </html>
