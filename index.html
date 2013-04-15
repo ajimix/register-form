@@ -18,9 +18,7 @@
 					margin: 0;
 					padding: 0;
 					font-family: Arial, Helvetica, sans-serif;
-				}
-				li {
-					list-style: none;
+					background-color: #edf3f7;
 				}
 			/* @endgroup BASIC STYLING  */
 
@@ -52,6 +50,7 @@
 					.form li {
 						margin: 10px;
 						color: #7997a8;
+						list-style: none;
 						font-size: 1.2em;
 					}
 					.form input[type=text], .form input[type=password] {
@@ -60,7 +59,16 @@
 						border: 0;
 						border-radius: 3px;
 						box-shadow: inset 0 1px 3px 0 rgba( 0, 0, 0, .5 );
+						color: #696969;
+						-webkit-transition: all 300ms linear;
+						-moz-transition: all 300ms linear;
+						-ms-transition: all 300ms linear;
+						-o-transition: all 300ms linear;
+						transition: all 300ms linear;
 					}
+						.form input[type=text]:focus, .form input[type=password]:focus {
+							background-color: #ECECEC;
+						}
 					.form input[type=submit] {
 						margin: 5px 0;
 						padding: 5px;
@@ -68,28 +76,33 @@
 						border: 1px solid #447523;
 						border-radius: 3px;
 						background: #6fc734;
-						background: -moz-linear-gradient(top,  #6fc734 0%, #5ea531 100%);
-						background: -webkit-linear-gradient(top,  #6fc734 0%,#5ea531 100%);
-						background: -o-linear-gradient(top,  #6fc734 0%,#5ea531 100%);
-						background: -ms-linear-gradient(top,  #6fc734 0%,#5ea531 100%);
-						background: linear-gradient(to bottom,  #6fc734 0%,#5ea531 100%);
-						filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6fc734', endColorstr='#5ea531',GradientType=0 );
+						background: -moz-linear-gradient( top,  #6fc734 0%, #5ea531 100% );
+						background: -webkit-linear-gradient( top,  #6fc734 0%, #5ea531 100% );
+						background: -o-linear-gradient( top,  #6fc734 0%, #5ea531 100% );
+						background: -ms-linear-gradient( top,  #6fc734 0%, #5ea531 100% );
+						background: linear-gradient( to bottom,  #6fc734 0%, #5ea531 100% );
 						box-shadow: 0 2px 2px 0 rgba( 0, 0, 0, .5 );
 						color: #fff;
+						filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6fc734', endColorstr='#5ea531',GradientType=0 );
+						-webkit-transition: all 300ms linear;
+						-moz-transition: all 300ms linear;
+						-ms-transition: all 300ms linear;
+						-o-transition: all 300ms linear;
+						transition: all 300ms linear;
 					}
 					/* @group ERROR MESSAGES */
 						.error-text {
 							display: block;
+							overflow: hidden;
 							margin-left: 6px;
 							width: 81%;
+							height: 0;
 							border-radius: 0 0 3px 3px;
 							background-color: #ffb6b6;
 							color: #f00;
 							text-align: center;
 							font-size: .7em;
-							height: 0;
 							line-height: 2.3em;
-							overflow: hidden;
 							-webkit-transition: height 300ms linear;
 							-moz-transition: height 300ms linear;
 							-ms-transition: height 300ms linear;
